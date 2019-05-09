@@ -17,10 +17,4 @@ interface CartPageToQuoteClientInterface
      * @return bool
      */
     public function isQuoteEditable(QuoteTransfer $quoteTransfer): bool;
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
-     */
-    public function setQuote(QuoteTransfer $quoteTransfer);
 }
