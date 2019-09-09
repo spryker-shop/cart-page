@@ -5,11 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerShop\Yves\CartPage\Model;
+namespace SprykerShop\Yves\CartPage\Expander;
 
 use Generated\Shared\Transfer\QuoteApprovalResponseTransfer;
 
-interface QuoteApprovalToQuoteSynchronizerInterface
+interface QuoteApprovalExpanderInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteApprovalResponseTransfer $quoteApprovalResponseTransfer
@@ -17,7 +17,7 @@ interface QuoteApprovalToQuoteSynchronizerInterface
      *
      * @return void
      */
-    public function synchronizeQuoteApprovals(
+    public function expandQuoteApprovals(
         QuoteApprovalResponseTransfer $quoteApprovalResponseTransfer,
         ?int $idQuoteApproval = null
     ): void;
