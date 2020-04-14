@@ -12,9 +12,6 @@ use Spryker\Yves\Kernel\AbstractFactory;
 use Symfony\Component\Form\FormFactory as SymfonyFormFactory;
 use Symfony\Component\Form\FormInterface;
 
-/**
- * @method \SprykerShop\Yves\CheckoutPage\CheckoutPageConfig getConfig()
- */
 class FormFactory extends AbstractFactory
 {
     /**
