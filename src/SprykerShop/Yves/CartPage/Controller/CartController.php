@@ -102,7 +102,7 @@ class CartController extends AbstractController
             return $this->redirectResponseInternal(CartPageRouteProviderPlugin::ROUTE_NAME_CART);
         }
 
-        $quantity = $request->get('quantity', 1);
+        $quantity = (int)$request->get('quantity', 1);
 
         if (!$this->canAddCartItem()) {
             $this->addErrorMessage(static::MESSAGE_PERMISSION_FAILED);
@@ -138,7 +138,7 @@ class CartController extends AbstractController
      */
     public function quickAddAction(Request $request, string $sku): RedirectResponse
     {
-        $quantity = $request->get('quantity', 1);
+        $quantity = (int)$request->get('quantity', 1);
 
         if (!$this->canAddCartItem()) {
             $this->addErrorMessage(static::MESSAGE_PERMISSION_FAILED);
@@ -217,7 +217,7 @@ class CartController extends AbstractController
      */
     public function changeAction(Request $request, $sku)
     {
-        $quantity = $request->get('quantity', 1);
+        $quantity = (int)$request->get('quantity', 1);
 
         if (!$this->canChangeCartItem($quantity)) {
             $this->addErrorMessage(static::MESSAGE_PERMISSION_FAILED);
@@ -287,7 +287,7 @@ class CartController extends AbstractController
      */
     public function updateAction(Request $request, $sku)
     {
-        $quantity = $request->get('quantity', 1);
+        $quantity = (int)$request->get('quantity', 1);
 
         if (!$this->canChangeCartItem($quantity)) {
             $this->addErrorMessage(static::MESSAGE_PERMISSION_FAILED);
