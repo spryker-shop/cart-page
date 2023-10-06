@@ -21,7 +21,7 @@ use Codeception\Actor;
  * @method void comment($description)
  * @method void pause()
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\SprykerShopTest\Yves\CartPage\PHPMD)
  */
 class CartPageTester extends Actor
 {
