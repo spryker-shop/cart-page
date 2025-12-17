@@ -218,7 +218,11 @@ class CartPageView implements CartPageViewInterface
             return true;
         }
 
-        if (!$this->quoteResponseTransfer && !$this->config->isQuoteValidationEnabledForAjaxCartItems()) {
+        if (!$this->config->isQuoteValidationEnabledForAjaxCartItems()) {
+            return true;
+        }
+
+        if (!$this->quoteResponseTransfer) {
             return true;
         }
 
