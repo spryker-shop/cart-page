@@ -115,5 +115,4 @@
         <property name="content" type="string"/>
         <property name="counterOnly" type="bool"/>
     </transfer>
-
 </transfers>

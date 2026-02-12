@@ -75,6 +75,15 @@
                 {% endwidget %}
             {% endblock %}
 
+            {% block availability %}
+                {% set productAvailabilityWidget = findWidget('ProductAvailabilityWidget', [
+                    data.product
+                ]) %}
+                {% if productAvailabilityWidget is defined %}
+                    {% widget productAvailabilityWidget %} {% endwidget %}
+                {% endif %}
+            {% endblock %}
+
             {% include molecule('cart-item-summary', 'CartPage') with {
                 data: {
                     unitPrice: data.product.unitPrice | money,
