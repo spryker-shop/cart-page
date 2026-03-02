@@ -69,19 +69,11 @@ abstract class AbstractCartController extends AbstractController
      */
     protected const KEY_MESSAGES = 'messages';
 
-    /**
-     * @return bool
-     */
     protected function canAddCartItem(): bool
     {
         return $this->canPerformCartItemAction(AddCartItemPermissionPlugin::KEY);
     }
 
-    /**
-     * @param int|null $itemQuantity
-     *
-     * @return bool
-     */
     protected function canChangeCartItem(?int $itemQuantity = null): bool
     {
         if ($itemQuantity === 0) {
@@ -91,19 +83,11 @@ abstract class AbstractCartController extends AbstractController
         return $this->canPerformCartItemAction(ChangeCartItemPermissionPlugin::KEY);
     }
 
-    /**
-     * @return bool
-     */
     protected function canRemoveCartItem(): bool
     {
         return $this->canPerformCartItemAction(RemoveCartItemPermissionPlugin::KEY);
     }
 
-    /**
-     * @param string $permissionPluginKey
-     *
-     * @return bool
-     */
     protected function canPerformCartItemAction(string $permissionPluginKey): bool
     {
         $quoteTransfer = $this->getFactory()
@@ -160,13 +144,6 @@ abstract class AbstractCartController extends AbstractController
         }
     }
 
-    /**
-     * @param string $sku
-     * @param int $quantity
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return bool
-     */
     protected function replaceItem(string $sku, int $quantity, Request $request): bool
     {
         $quoteTransfer = $this->getFactory()

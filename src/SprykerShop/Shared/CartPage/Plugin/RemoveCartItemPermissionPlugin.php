@@ -19,9 +19,6 @@ class RemoveCartItemPermissionPlugin implements PermissionPluginInterface
      */
     public const KEY = 'RemoveCartItemPermissionPlugin';
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return static::KEY;

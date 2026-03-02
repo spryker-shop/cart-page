@@ -21,35 +21,21 @@ class ProductAbstractAddToCartButtonWidget extends AbstractWidget
      */
     protected const PARAMETER_PRODUCT_ABSTRACT = 'productAbstract';
 
-    /**
-     * @param array $productAbstract
-     */
     public function __construct(array $productAbstract)
     {
         $this->addProductAbstractParameter($productAbstract);
     }
 
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return 'ProductAbstractAddToCartButtonWidget';
     }
 
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return '@CartPage/views/product-abstract-add-to-cart-ajax/product-abstract-add-to-cart-ajax.twig';
     }
 
-    /**
-     * @param array $productAbstract
-     *
-     * @return void
-     */
     protected function addProductAbstractParameter(array $productAbstract): void
     {
         $this->addParameter(static::PARAMETER_PRODUCT_ABSTRACT, $productAbstract);

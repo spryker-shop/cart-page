@@ -232,11 +232,6 @@ class CartAsyncController extends AbstractCartController
         );
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     public function miniCartViewAction(Request $request): Response
     {
         $cartClient = $this->getFactory()->getCartClient();
@@ -279,9 +274,6 @@ class CartAsyncController extends AbstractCartController
         return $viewData;
     }
 
-    /**
-     * @return void
-     */
     protected function addMessages(): void
     {
         $zedRequestClient = $this->getFactory()->getZedRequestClient();
@@ -303,9 +295,6 @@ class CartAsyncController extends AbstractCartController
         }
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
     protected function getMessagesJsonResponse(): JsonResponse
     {
         return $this->jsonResponse([
@@ -313,12 +302,6 @@ class CartAsyncController extends AbstractCartController
         ]);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\MiniCartViewTransfer $miniCartViewTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\MiniCartViewTransfer
-     */
     protected function executeMiniCartViewExpanderPlugins(
         MiniCartViewTransfer $miniCartViewTransfer,
         QuoteTransfer $quoteTransfer

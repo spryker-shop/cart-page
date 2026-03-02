@@ -25,21 +25,11 @@ class CartPageToUtilNumberServiceBridge implements CartPageToUtilNumberServiceIn
         $this->utilNumberService = $utilNumberService;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\NumberFormatIntRequestTransfer $numberFormatIntRequestTransfer
-     *
-     * @return string
-     */
     public function formatInt(NumberFormatIntRequestTransfer $numberFormatIntRequestTransfer): string
     {
         return $this->utilNumberService->formatInt($numberFormatIntRequestTransfer);
     }
 
-    /**
-     * @param string|null $locale
-     *
-     * @return \Generated\Shared\Transfer\NumberFormatConfigTransfer
-     */
     public function getNumberFormatConfig(?string $locale = null): NumberFormatConfigTransfer
     {
         return $this->utilNumberService->getNumberFormatConfig($locale);

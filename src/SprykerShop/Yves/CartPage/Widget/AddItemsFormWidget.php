@@ -28,25 +28,16 @@ class AddItemsFormWidget extends AbstractWidget
         $this->addParameter('products', $productViewTransfers);
     }
 
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return 'AddItemsFormWidget';
     }
 
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return '@CartPage/views/add-items-form/add-items-form.twig';
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormView
-     */
     protected function createAddToCartFormView(): FormView
     {
         return $this->getFactory()

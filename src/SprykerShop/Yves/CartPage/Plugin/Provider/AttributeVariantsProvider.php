@@ -25,10 +25,6 @@ class AttributeVariantsProvider
      */
     protected $cartItemHandler;
 
-    /**
-     * @param \SprykerShop\Yves\CartPage\Dependency\Plugin\CartVariantAttributeMapperPluginInterface $cartVariantAttributeMapperPlugin
-     * @param \SprykerShop\Yves\CartPage\Handler\CartItemHandlerInterface $cartItemHandler
-     */
     public function __construct(
         CartVariantAttributeMapperPluginInterface $cartVariantAttributeMapperPlugin,
         CartItemHandlerInterface $cartItemHandler

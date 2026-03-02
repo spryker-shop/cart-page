@@ -175,11 +175,6 @@ class CartPageRouteProviderPlugin extends AbstractRouteProviderPlugin
         return $routeCollection;
     }
 
-    /**
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     protected function addCartRoute(RouteCollection $routeCollection): RouteCollection
     {
         $route = $this->buildRoute('/cart', 'CartPage', 'Cart', 'indexAction');
@@ -205,11 +200,6 @@ class CartPageRouteProviderPlugin extends AbstractRouteProviderPlugin
         return $routeCollection;
     }
 
-    /**
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     protected function addCartAddItemsRoute(RouteCollection $routeCollection): RouteCollection
     {
         $route = $this->buildRoute('/cart/add-items', 'CartPage', 'Cart', 'addItemsAction');
@@ -234,11 +224,6 @@ class CartPageRouteProviderPlugin extends AbstractRouteProviderPlugin
         return $routeCollection;
     }
 
-    /**
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     protected function addCartAddRoute(RouteCollection $routeCollection): RouteCollection
     {
         $route = $this->buildRoute('/cart/add/{sku}', 'CartPage', 'Cart', 'addAction');
@@ -282,11 +267,6 @@ class CartPageRouteProviderPlugin extends AbstractRouteProviderPlugin
         return $routeCollection;
     }
 
-    /**
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     protected function addCartRemoveRoute(RouteCollection $routeCollection): RouteCollection
     {
         $route = $this->buildRoute('/cart/remove/{sku}/{groupKey}', 'CartPage', 'Cart', 'removeAction');
@@ -299,11 +279,6 @@ class CartPageRouteProviderPlugin extends AbstractRouteProviderPlugin
         return $routeCollection;
     }
 
-    /**
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     protected function addCartChangeQuantityRoute(RouteCollection $routeCollection): RouteCollection
     {
         $route = $this->buildRoute('/cart/change/{sku}', 'CartPage', 'Cart', 'changeAction');
@@ -314,11 +289,6 @@ class CartPageRouteProviderPlugin extends AbstractRouteProviderPlugin
         return $routeCollection;
     }
 
-    /**
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     protected function addCartUpdateRoute(RouteCollection $routeCollection): RouteCollection
     {
         $route = $this->buildRoute('/cart/update/{sku}', 'CartPage', 'Cart', 'updateAction');

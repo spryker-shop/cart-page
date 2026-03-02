@@ -19,9 +19,6 @@ interface CartPageToZedRequestClientInterface
      */
     public function getLastResponseErrorMessages();
 
-    /**
-     * @return void
-     */
     public function addResponseMessagesToMessenger(): void;
 
     /**

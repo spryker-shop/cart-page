@@ -29,19 +29,11 @@ class ProductViewExpander implements ProductViewExpanderInterface
      */
     protected $router;
 
-    /**
-     * @param \Symfony\Cmf\Component\Routing\ChainRouterInterface $router
-     */
     public function __construct(ChainRouterInterface $router)
     {
         $this->router = $router;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductViewTransfer
-     */
     public function expandProductViewWithCartData(ProductViewTransfer $productViewTransfer): ProductViewTransfer
     {
         return $productViewTransfer->setAddToCartUrl($this->router->generate(

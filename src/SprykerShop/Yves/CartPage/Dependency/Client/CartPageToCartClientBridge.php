@@ -121,17 +121,11 @@ class CartPageToCartClientBridge implements CartPageToCartClientInterface
         return $this->cartClient->getItemCount();
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function validateQuote(): QuoteResponseTransfer
     {
         return $this->cartClient->validateQuote();
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function resetQuoteLock(): QuoteResponseTransfer
     {
         return $this->cartClient->resetQuoteLock();

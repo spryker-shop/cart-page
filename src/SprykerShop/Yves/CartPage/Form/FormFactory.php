@@ -14,41 +14,26 @@ use Symfony\Component\Form\FormInterface;
 
 class FormFactory extends AbstractFactory
 {
-    /**
-     * @return \Symfony\Component\Form\FormFactory
-     */
     public function getFormFactory(): SymfonyFormFactory
     {
         return $this->getProvidedDependency(ApplicationConstants::FORM_FACTORY);
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormInterface
-     */
     public function getRemoveForm(): FormInterface
     {
         return $this->getFormFactory()->create(RemoveForm::class);
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormInterface
-     */
     public function getAddToCartForm(): FormInterface
     {
         return $this->getFormFactory()->create(AddToCartForm::class);
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormInterface
-     */
     public function getAddItemsForm(): FormInterface
     {
         return $this->getFormFactory()->create(AddItemsForm::class);
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormInterface
-     */
     public function getCartChangeQuantityForm(): FormInterface
     {
         return $this->getFormFactory()->create(CartChangeQuantityForm::class);

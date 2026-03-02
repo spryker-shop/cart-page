@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\ProductViewTransfer;
 
 interface ProductViewExpanderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductViewTransfer
-     */
     public function expandProductViewWithCartData(ProductViewTransfer $productViewTransfer): ProductViewTransfer;
 }

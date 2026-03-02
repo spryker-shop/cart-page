@@ -15,25 +15,16 @@ use Spryker\Yves\Kernel\Widget\AbstractWidget;
  */
 class CartSummaryHideTaxAmountWidget extends AbstractWidget
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     */
     public function __construct(QuoteTransfer $quoteTransfer)
     {
         $this->addParameter('cart', $quoteTransfer);
     }
 
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return 'CartSummaryHideTaxAmountWidget';
     }
 
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return '@CartPage/views/cart-summary-hide-tax-amount-widget/cart-summary-hide-tax-amount-widget.twig';

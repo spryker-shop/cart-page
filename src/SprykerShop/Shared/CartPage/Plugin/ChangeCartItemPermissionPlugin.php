@@ -19,9 +19,6 @@ class ChangeCartItemPermissionPlugin implements PermissionPluginInterface
      */
     public const KEY = 'ChangeCartItemPermissionPlugin';
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return static::KEY;

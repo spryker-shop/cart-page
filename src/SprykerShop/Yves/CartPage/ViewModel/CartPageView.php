@@ -59,14 +59,6 @@ class CartPageView implements CartPageViewInterface
      */
     protected $quoteResponseTransfer;
 
-    /**
-     * @param \SprykerShop\Yves\CartPage\CartPageConfig $config
-     * @param \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToCartClientInterface $cartClient
-     * @param \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToQuoteClientInterface $quoteClient
-     * @param \SprykerShop\Yves\CartPage\Model\CartItemReaderInterface $cartItemReader
-     * @param \SprykerShop\Yves\CartPage\Plugin\Provider\AttributeVariantsProvider $attributesVariantsProvider
-     * @param \SprykerShop\Yves\CartPage\Form\FormFactory $formFactory
-     */
     public function __construct(
         CartPageConfig $config,
         CartPageToCartClientInterface $cartClient,
@@ -119,9 +111,6 @@ class CartPageView implements CartPageViewInterface
         return $this->getViewData($cartPageViewArgumentsTransfer);
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function getAjaxQuote(): QuoteTransfer
     {
         if ($this->quoteTransfer !== null) {
@@ -133,9 +122,6 @@ class CartPageView implements CartPageViewInterface
         return $this->quoteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function getQuote(): QuoteTransfer
     {
         if ($this->quoteTransfer !== null) {
@@ -157,9 +143,6 @@ class CartPageView implements CartPageViewInterface
         return $this->quoteTransfer;
     }
 
-    /**
-     * @return bool
-     */
     protected function isQuoteValidationRequired(): bool
     {
         $currentTimestamp = time();
@@ -178,12 +161,6 @@ class CartPageView implements CartPageViewInterface
         return $this->cartItemReader->getCartItems($this->getQuote());
     }
 
-    /**
-     * @param string $locale
-     * @param array $selectedAttributes
-     *
-     * @return array
-     */
     protected function getAttributes(string $locale, array $selectedAttributes): array
     {
         return $this->attributesVariantsProvider->getItemsAttributes(
@@ -193,25 +170,16 @@ class CartPageView implements CartPageViewInterface
         );
     }
 
-    /**
-     * @return bool
-     */
     protected function isQuoteEditable(): bool
     {
         return $this->quoteClient->isQuoteEditable($this->getQuote());
     }
 
-    /**
-     * @return bool
-     */
     protected function isQuoteLocked(): bool
     {
         return $this->quoteClient->isQuoteLocked($this->getQuote());
     }
 
-    /**
-     * @return bool
-     */
     protected function isQuoteValid(): bool
     {
         if (!$this->config->isQuoteValidationEnabled()) {
@@ -229,9 +197,6 @@ class CartPageView implements CartPageViewInterface
         return $this->quoteResponseTransfer->getIsSuccessfulOrFail();
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormView
-     */
     protected function getRemoveCartItemForm(): FormView
     {
         return $this->formFactory->getRemoveForm()->createView();

@@ -39,9 +39,6 @@ class IsQuoteValidTest extends Unit
      */
     protected CartPageView $cartPageView;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function _before(): void
     {
         parent::_before();

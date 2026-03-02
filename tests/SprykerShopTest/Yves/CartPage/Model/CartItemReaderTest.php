@@ -27,9 +27,6 @@ class CartItemReaderTest extends Unit
      */
     protected CartPageTester $tester;
 
-    /**
-     * @return void
-     */
     public function testExecutesCartItemTransformerPlugin(): void
     {
         // Arrange

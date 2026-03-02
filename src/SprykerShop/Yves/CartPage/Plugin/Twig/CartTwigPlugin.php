@@ -64,11 +64,6 @@ class CartTwigPlugin extends AbstractPlugin implements TwigPluginInterface
         return $twig;
     }
 
-    /**
-     * @param \Twig\Environment $twig
-     *
-     * @return \Twig\Environment
-     */
     protected function addTwigFunctions(Environment $twig): Environment
     {
         $twig->addFunction($this->getCartQuantityFunction());
@@ -76,9 +71,6 @@ class CartTwigPlugin extends AbstractPlugin implements TwigPluginInterface
         return $twig;
     }
 
-    /**
-     * @return \Twig\TwigFunction
-     */
     protected function getCartQuantityFunction(): TwigFunction
     {
         return new TwigFunction(static::FUNCTION_NAME_GET_CART_QUANTITY, function () {

@@ -64,9 +64,6 @@ class AddToCartFormWidget extends AbstractWidget
         $this->expandFormWidgetParameters($productViewTransfer);
     }
 
-    /**
-     * @return void
-     */
     protected function addAddToCartFormParameter(): void
     {
         $this->addParameter(static::PARAMETER_ADD_TO_CART_FORM, $this->createAddToCartFormView());
@@ -82,21 +79,11 @@ class AddToCartFormWidget extends AbstractWidget
         $this->addParameter(static::PARAMETER_CONFIG, $config);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     *
-     * @return void
-     */
     protected function addProductParameter(ProductViewTransfer $productViewTransfer): void
     {
         $this->addParameter(static::PARAMETER_PRODUCT, $productViewTransfer);
     }
 
-    /**
-     * @param bool $isAddToCartDisabled
-     *
-     * @return void
-     */
     protected function addIsAddToCartDisabledParameter(bool $isAddToCartDisabled): void
     {
         $this->addParameter(static::PARAMETER_IS_ADD_TO_CART_DISABLED, $isAddToCartDisabled);
@@ -112,33 +99,21 @@ class AddToCartFormWidget extends AbstractWidget
         $this->addParameter(static::PARAMETER_QUANTITY_OPTIONS, $quantityOptions);
     }
 
-    /**
-     * @return void
-     */
     protected function addFormNamePostfixParameter(): void
     {
         $this->addParameter(static::PARAMETER_FORM_NAME_POSTFIX, '');
     }
 
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return 'AddToCartFormWidget';
     }
 
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return '@CartPage/views/add-to-cart-form/add-to-cart-form.twig';
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormView
-     */
     protected function createAddToCartFormView(): FormView
     {
         return $this->getFactory()
@@ -147,11 +122,6 @@ class AddToCartFormWidget extends AbstractWidget
             ->createView();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     *
-     * @return void
-     */
     protected function expandFormWidgetParameters(ProductViewTransfer $productViewTransfer): void
     {
         $formParameters = $this->getParameters();

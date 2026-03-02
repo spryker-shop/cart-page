@@ -81,13 +81,7 @@ interface CartPageToCartClientInterface
      */
     public function getItemCount();
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function validateQuote(): QuoteResponseTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function resetQuoteLock(): QuoteResponseTransfer;
 }

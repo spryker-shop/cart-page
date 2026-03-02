@@ -35,9 +35,6 @@ use Twig\Environment;
  */
 class CartPageFactory extends AbstractFactory
 {
-    /**
-     * @return \SprykerShop\Yves\CartPage\ViewModel\CartPageViewInterface
-     */
     public function createCartPageView(): CartPageViewInterface
     {
         return new CartPageView(
@@ -58,9 +55,6 @@ class CartPageFactory extends AbstractFactory
         return $this->getProvidedDependency(CartPageDependencyProvider::CLIENT_CART);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToQuoteClientInterface
-     */
     public function getQuoteClient(): CartPageToQuoteClientInterface
     {
         return $this->getProvidedDependency(CartPageDependencyProvider::CLIENT_QUOTE);
@@ -114,9 +108,6 @@ class CartPageFactory extends AbstractFactory
         return $this->getRequestStack()->getCurrentRequest();
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\RequestStack
-     */
     public function getRequestStack(): RequestStack
     {
         return $this->getProvidedDependency(CartPageDependencyProvider::SERVICE_REQUEST_STACK);
@@ -149,25 +140,16 @@ class CartPageFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToProductStorageClientInterface
-     */
     public function getProductStorageClient(): CartPageToProductStorageClientInterface
     {
         return $this->getProvidedDependency(CartPageDependencyProvider::CLIENT_PRODUCT_STORAGE);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToAvailabilityStorageClientInterface
-     */
     public function getAvailabilityStorageClient(): CartPageToAvailabilityStorageClientInterface
     {
         return $this->getProvidedDependency(CartPageDependencyProvider::CLIENT_AVAILABILITY_STORAGE);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToZedRequestClientInterface
-     */
     public function getZedRequestClient(): CartPageToZedRequestClientInterface
     {
         return $this->getProvidedDependency(CartPageDependencyProvider::CLIENT_ZED_REQUEST);
@@ -224,33 +206,21 @@ class CartPageFactory extends AbstractFactory
         return new CartItemsAvailabilityMapper($this->getAvailabilityStorageClient());
     }
 
-    /**
-     * @return \SprykerShop\Yves\CartPage\ProductViewExpander\ProductViewExpanderInterface
-     */
     public function createProductViewExpander(): ProductViewExpanderInterface
     {
         return new ProductViewExpander($this->getRouter());
     }
 
-    /**
-     * @return \Symfony\Cmf\Component\Routing\ChainRouterInterface
-     */
     public function getRouter(): ChainRouterInterface
     {
         return $this->getProvidedDependency(CartPageDependencyProvider::SERVICE_ROUTER);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CartPage\Form\FormFactory
-     */
     public function createCartPageFormFactory(): FormFactory
     {
         return new FormFactory();
     }
 
-    /**
-     * @return \SprykerShop\Yves\CartPage\Expander\MiniCartViewExpanderInterface
-     */
     public function createMiniCartViewExpander(): MiniCartViewExpanderInterface
     {
         return new MiniCartViewExpander(
@@ -259,17 +229,11 @@ class CartPageFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
-     */
     public function getCsrfTokenManager(): CsrfTokenManagerInterface
     {
         return $this->getProvidedDependency(CartPageDependencyProvider::SERVICE_FORM_CSRF_PROVIDER);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CartPage\Dependency\Service\CartPageToUtilNumberServiceInterface
-     */
     public function getUtilNumberService(): CartPageToUtilNumberServiceInterface
     {
         return $this->getProvidedDependency(CartPageDependencyProvider::SERVICE_UTIL_NUMBER);
@@ -283,9 +247,6 @@ class CartPageFactory extends AbstractFactory
         return $this->getProvidedDependency(CartPageDependencyProvider::PLUGINS_ADD_TO_CART_FORM_WIDGET_PARAMETER_EXPANDER);
     }
 
-    /**
-     * @return \Twig\Environment
-     */
     public function getTwigEnvironment(): Environment
     {
         return $this->getProvidedDependency(CartPageDependencyProvider::TWIG_ENVIRONMENT);

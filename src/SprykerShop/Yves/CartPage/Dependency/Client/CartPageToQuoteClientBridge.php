@@ -24,21 +24,11 @@ class CartPageToQuoteClientBridge implements CartPageToQuoteClientInterface
         $this->quoteClient = $quoteClient;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     public function isQuoteEditable(QuoteTransfer $quoteTransfer): bool
     {
         return $this->quoteClient->isQuoteEditable($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     public function isQuoteLocked(QuoteTransfer $quoteTransfer): bool
     {
         return $this->quoteClient->isQuoteLocked($quoteTransfer);

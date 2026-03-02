@@ -19,9 +19,6 @@ class AddCartItemPermissionPlugin implements PermissionPluginInterface
      */
     public const KEY = 'AddCartItemPermissionPlugin';
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return static::KEY;

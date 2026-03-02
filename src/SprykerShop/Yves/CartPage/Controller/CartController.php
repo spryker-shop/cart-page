@@ -134,9 +134,6 @@ class CartController extends AbstractCartController
         return $this->executeGetUpsellingProductsWidgetAjaxAction();
     }
 
-    /**
-     * @return \Spryker\Yves\Kernel\View\View
-     */
     protected function executeGetUpsellingProductsWidgetAjaxAction(): View
     {
         $viewData = [
@@ -162,9 +159,6 @@ class CartController extends AbstractCartController
         return $this->executeGetCartItemsAjaxAction();
     }
 
-    /**
-     * @return \Spryker\Yves\Kernel\View\View
-     */
     protected function executeGetCartItemsAjaxAction(): View
     {
         $cartPageViewArgumentsTransfer = new CartPageViewArgumentsTransfer();
@@ -221,12 +215,6 @@ class CartController extends AbstractCartController
         return $this->redirectResponseInternal(CartPageRouteProviderPlugin::ROUTE_NAME_CART);
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param string $sku
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
     public function quickAddAction(Request $request, string $sku): RedirectResponse
     {
         $quantity = $request->get('quantity', 1);
@@ -240,13 +228,6 @@ class CartController extends AbstractCartController
         return $this->executeQuickAddAction($request, $sku, $quantity);
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param string $sku
-     * @param int $quantity
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
     protected function executeQuickAddAction(Request $request, string $sku, int $quantity): RedirectResponse
     {
         $itemTransfer = (new ItemTransfer())
@@ -405,11 +386,6 @@ class CartController extends AbstractCartController
         );
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
     public function addAjaxAction(Request $request): JsonResponse
     {
         $response = $this->executeAddAjaxAction($request);
@@ -417,11 +393,6 @@ class CartController extends AbstractCartController
         return $this->jsonResponse($response);
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return array
-     */
     protected function executeAddAjaxAction(Request $request): array
     {
         $csrfToken = $this->createCsrfToken(
@@ -486,12 +457,6 @@ class CartController extends AbstractCartController
         ];
     }
 
-    /**
-     * @param string $tokenId
-     * @param string $value
-     *
-     * @return \Symfony\Component\Security\Csrf\CsrfToken
-     */
     protected function createCsrfToken(string $tokenId, string $value): CsrfToken
     {
         return new CsrfToken($tokenId, $value);
@@ -535,11 +500,6 @@ class CartController extends AbstractCartController
         ];
     }
 
-    /**
-     * @param int $cartQuantity
-     *
-     * @return string
-     */
     protected function getFormattedCartQuantity(int $cartQuantity): string
     {
         $numberFormatIntRequestTransfer = (new NumberFormatIntRequestTransfer())

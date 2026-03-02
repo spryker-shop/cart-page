@@ -36,10 +36,6 @@ class CartChangeQuantityFormWidget extends AbstractWidget
      */
     protected const PARAMETER_NUMBER_FORMAT_CONFIG = 'numberFormatConfig';
 
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     * @param bool $readOnly
-     */
     public function __construct(ItemTransfer $itemTransfer, bool $readOnly)
     {
         $this->addCartChangeQuantityFormParameter();
@@ -48,25 +44,16 @@ class CartChangeQuantityFormWidget extends AbstractWidget
         $this->addNumberFormatConfigParameter();
     }
 
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return 'CartChangeQuantityFormWidget';
     }
 
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return '@CartPage/views/cart-change-quantity-form/cart-change-quantity-form.twig';
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormView
-     */
     protected function createCartChangeQuantityFormView(): FormView
     {
         return $this->getFactory()
@@ -75,9 +62,6 @@ class CartChangeQuantityFormWidget extends AbstractWidget
             ->createView();
     }
 
-    /**
-     * @return void
-     */
     protected function addCartChangeQuantityFormParameter(): void
     {
         $this->addParameter(
@@ -89,29 +73,16 @@ class CartChangeQuantityFormWidget extends AbstractWidget
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     *
-     * @return void
-     */
     protected function addCartItemParameter(ItemTransfer $itemTransfer): void
     {
         $this->addParameter(static::PARAMETER_CART_ITEM, $itemTransfer);
     }
 
-    /**
-     * @param bool $readOnly
-     *
-     * @return void
-     */
     protected function addReadOnlyParameter(bool $readOnly): void
     {
         $this->addParameter(static::PARAMETER_READ_ONLY, $readOnly);
     }
 
-    /**
-     * @return void
-     */
     protected function addNumberFormatConfigParameter(): void
     {
         $numberFormatConfigTransfer = $this->getFactory()

@@ -31,33 +31,21 @@ class CartAddProductAsSeparateItemWidget extends AbstractWidget
         $this->addIsQuoteStorageStrategySessionEnabledParameter();
     }
 
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return 'CartAddProductAsSeparateItemWidget';
     }
 
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return '@CartPage/views/cart-add-product-as-separate-item/cart-add-product-as-separate-item.twig';
     }
 
-    /**
-     * @return void
-     */
     protected function addIsQuoteStorageStrategySessionEnabledParameter(): void
     {
         $this->addParameter(static::PARAMETER_IS_QUOTE_STORAGE_STRATEGY_SESSION_ENABLED, $this->isQuoteStorageStrategySessionEnabled());
     }
 
-    /**
-     * @return bool
-     */
     protected function isQuoteStorageStrategySessionEnabled(): bool
     {
         $storageStrategy = $this->getFactory()

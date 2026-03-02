@@ -104,9 +104,6 @@ class CartItemsAttributeMapperTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testBuildMapWithTwoAvailableConcretes(): void
     {
         // Arrange
@@ -136,9 +133,6 @@ class CartItemsAttributeMapperTest extends Unit
         $this->assertFalse($attributes[static::FAKE_SKU_1]['flash_memory']['8 GB']['selected']);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildMapWithOneAvailableConcretes(): void
     {
         // Arrange
@@ -168,9 +162,6 @@ class CartItemsAttributeMapperTest extends Unit
         $this->assertFalse($attributes[static::FAKE_SKU_1]['flash_memory']['8 GB']['selected']);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildMapWithoutAvailableConcretes(): void
     {
         // Arrange
@@ -200,9 +191,6 @@ class CartItemsAttributeMapperTest extends Unit
         $this->assertFalse($attributes[static::FAKE_SKU_1]['flash_memory']['8 GB']['selected']);
     }
 
-    /**
-     * @return void
-     */
     public function testBuildMapChecksDeprecatedMethodToKeepBC(): void
     {
         // Arrange
@@ -232,12 +220,6 @@ class CartItemsAttributeMapperTest extends Unit
         $this->assertFalse($attributes[static::FAKE_SKU_1]['flash_memory']['8 GB']['selected']);
     }
 
-    /**
-     * @param array $expectedAvailabilityMap
-     * @param bool|null $withNewAttributeMap
-     *
-     * @return \SprykerShop\Yves\CartPage\Mapper\CartItemsMapperInterface
-     */
     protected function getCartItemsAttributeMapper(array $expectedAvailabilityMap, ?bool $withNewAttributeMap = true): CartItemsMapperInterface
     {
         return new CartItemsAttributeMapper(

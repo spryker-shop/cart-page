@@ -16,10 +16,6 @@ use Symfony\Component\Form\FormView;
  */
 class RemoveFromCartFormWidget extends AbstractWidget
 {
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $cartItem
-     * @param string|null $formNamePostfix
-     */
     public function __construct(ItemTransfer $cartItem, ?string $formNamePostfix = null)
     {
         $this->addParameter('removeFromCartForm', $this->createRemoveFromCartFormView());
@@ -27,25 +23,16 @@ class RemoveFromCartFormWidget extends AbstractWidget
         $this->addParameter('formNamePostfix', $formNamePostfix);
     }
 
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return 'RemoveFromCartFormWidget';
     }
 
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return '@CartPage/views/remove-from-cart-form/remove-from-cart-form.twig';
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormView
-     */
     protected function createRemoveFromCartFormView(): FormView
     {
         return $this->getFactory()

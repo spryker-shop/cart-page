@@ -28,9 +28,6 @@ class CartLockController extends AbstractController
      */
     protected const ROUTE_CART = 'cart';
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
     public function resetLockAction(): RedirectResponse
     {
         $response = $this->executeResetLockAction();
@@ -38,9 +35,6 @@ class CartLockController extends AbstractController
         return $response;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
     protected function executeResetLockAction(): RedirectResponse
     {
         $quoteResponseTransfer = $this->getFactory()

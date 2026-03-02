@@ -33,11 +33,6 @@ class CartItemHandler implements CartItemHandlerInterface
      */
     protected $zedRequestClient;
 
-    /**
-     * @param \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToCartClientInterface $cartClient
-     * @param \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToProductStorageClientInterface $productClient
-     * @param \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToZedRequestClientInterface $zedRequestClient
-     */
     public function __construct(
         CartPageToCartClientInterface $cartClient,
         CartPageToProductStorageClientInterface $productClient,

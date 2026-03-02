@@ -43,9 +43,6 @@ class CartPageGatewayBackUrlResolverStrategyPluginTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -53,9 +50,6 @@ class CartPageGatewayBackUrlResolverStrategyPluginTest extends Unit
         $this->cartPageGatewayBackUrlResolverStrategyPlugin = new CartPageGatewayBackUrlResolverStrategyPlugin();
     }
 
-    /**
-     * @return void
-     */
     public function testCartPageGatewayBackUrlResolverStrategyPluginChecksIsApplicable(): void
     {
         // Arrange
@@ -72,9 +66,6 @@ class CartPageGatewayBackUrlResolverStrategyPluginTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testCartPageGatewayBackUrlResolverStrategyPluginChecksIsApplicableForFakeSourceType(): void
     {
         // Arrange
@@ -91,9 +82,6 @@ class CartPageGatewayBackUrlResolverStrategyPluginTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testCartPageGatewayBackUrlResolverStrategyPluginChecksIsApplicableForNullableSourceType(): void
     {
         // Arrange
@@ -110,9 +98,6 @@ class CartPageGatewayBackUrlResolverStrategyPluginTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testCartPageGatewayBackUrlResolverStrategyPluginResolvesBackUrl(): void
     {
         // Arrange

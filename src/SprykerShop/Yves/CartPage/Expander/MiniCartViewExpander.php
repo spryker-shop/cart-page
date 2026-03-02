@@ -24,22 +24,12 @@ class MiniCartViewExpander implements MiniCartViewExpanderInterface
      */
     protected CartPageConfig $cartPageConfig;
 
-    /**
-     * @param \Twig\Environment $twigEnvironment
-     * @param \SprykerShop\Yves\CartPage\CartPageConfig $cartPageConfig
-     */
     public function __construct(Environment $twigEnvironment, CartPageConfig $cartPageConfig)
     {
         $this->twigEnvironment = $twigEnvironment;
         $this->cartPageConfig = $cartPageConfig;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\MiniCartViewTransfer $miniCartViewTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\MiniCartViewTransfer
-     */
     public function expand(
         MiniCartViewTransfer $miniCartViewTransfer,
         QuoteTransfer $quoteTransfer
