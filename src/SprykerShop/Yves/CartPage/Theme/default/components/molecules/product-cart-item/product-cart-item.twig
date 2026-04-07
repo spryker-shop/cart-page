@@ -51,6 +51,11 @@
                 {{- 'cart.item.sku' | trans }} {{ data.sku -}}
             </small>
         {%- endblock %}
+        {% widget 'ProductAttributeVisibilityCartWidget' args [
+            data.cart is iterable ? null : data.cart,
+            data.product.idProductAbstract,
+            data.product.id,
+        ] only %}{% endwidget %}
 
         {% block additionalInformation %}
             {% if data.attributes %}

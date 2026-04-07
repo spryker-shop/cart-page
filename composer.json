@@ -59,7 +59,8 @@
         "spryker/permission": "If you want to use permissions plugins",
         "spryker/router": "Use this module when using plugins that adds routes to the Route Module.",
         "spryker/shipment": "If you want to use the shipment total price, min version 8.4.0",
-        "spryker/silex": "Use this module when using plugins that need Silex dependencies."
+        "spryker/silex": "Use this module when using plugins that need Silex dependencies.",
+        "spryker-feature/product-experience-management": "If you want to use ProductAttributeVisibilityCartWidget."
     },
     "autoload": {
         "psr-4": {
