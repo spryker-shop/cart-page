@@ -70,6 +70,9 @@
                                 {% endblock %}
                             </div>
                             <div class="col col--xl-3">
+
+                                {% widget 'PunchoutCartWidget' args [data.cart] only %}{% endwidget %}
+
                                 <div class="box">
                                     {% if (not is_granted('ROLE_USER') or data.isQuoteEditable) and can('SeePricePermissionPlugin') %}
                                         {% widget 'CartCodeFormWidget' args [data.cart] with {
@@ -200,6 +203,8 @@
                                     </form>
                                     <hr>
                                 {% endif %}
+
+                                {% widget 'PunchoutCartWidget' args [data.cart] only %}{% endwidget %}
 
                                 {% block cartNote %}
                                     {% widget 'CartNoteFormWidget' args [data.cart] only %}
