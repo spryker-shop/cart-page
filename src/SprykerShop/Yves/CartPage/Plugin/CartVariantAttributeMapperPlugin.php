@@ -17,6 +17,8 @@ use SprykerShop\Yves\CartPage\Dependency\Plugin\CartVariantAttributeMapperPlugin
 class CartVariantAttributeMapperPlugin extends AbstractPlugin implements CartVariantAttributeMapperPluginInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer> $items
      * @param string $localeName
      *

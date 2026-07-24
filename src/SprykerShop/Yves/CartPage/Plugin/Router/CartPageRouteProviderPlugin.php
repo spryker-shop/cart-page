@@ -149,14 +149,10 @@ class CartPageRouteProviderPlugin extends AbstractRouteProviderPlugin
     public const ROUTE_NAME_GET_CART_ITEMS_AJAX = 'cart/get-cart-items';
 
     /**
-     * Specification:
+     * {@inheritDoc}
      * - Adds Routes to the RouteCollection.
      *
      * @api
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     public function addRoutes(RouteCollection $routeCollection): RouteCollection
     {
