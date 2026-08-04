@@ -5,7 +5,7 @@ import { mount } from 'ShopUi/app';
 export default class CartUpselling extends Component {
     protected providers: AjaxProvider[];
 
-    protected readyCallback(): void {
+    protected init(): void {
         this.providers = <AjaxProvider[]>Array.from(document.getElementsByClassName(this.providerClassName));
 
         this.mapEvents();

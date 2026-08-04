@@ -1,5 +1,11 @@
+@use 'sass:meta';
+
 @mixin cart-page-product-cart-item($name: '.product-cart-item') {
     @include shop-ui-product-item($name) {
+        @if meta.mixin-exists(cart-page-product-cart-item-base-hook) {
+            @include cart-page-product-cart-item-base-hook;
+        }
+
         @include helper-breakpoint(lg) {
             flex-direction: row;
             justify-content: space-between;
