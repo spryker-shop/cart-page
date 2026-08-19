@@ -269,8 +269,13 @@ class CartItemsAttributeMapper implements CartItemsMapperInterface
         $attributeMapWithAvailability = [];
         $availableConcreteProductsSku = $this->getAvailableConcreteProductsSku($attributeMap);
         $attributeVariantMap = $attributeMap[static::KEY_ATTRIBUTE_VARIANT_MAP];
+        $itemSuperAttributes = $attributeVariantMap[$itemTransfer->getId()] ?? [];
 
         foreach ($attributeVariantMap as $idProductConcrete => $superAttributes) {
+            if (!$this->isVariantReachableFromItem($superAttributes, $itemSuperAttributes)) {
+                continue;
+            }
+
             $attributeMapWithAvailability = $this->setProductAvailability(
                 $superAttributes,
                 $attributeMapWithAvailability,
@@ -282,6 +287,25 @@ class CartItemsAttributeMapper implements CartItemsMapperInterface
         }
 
         return $attributeMapWithAvailability;
+    }
+
+    /**
+     * A variant is reachable when it differs from the cart item in at most one super attribute, because
+     * the shopper switches a single attribute at a time. The values of a variant differing in more than
+     * one attribute cannot be combined with the item and must not be offered for it.
+     *
+     * @param array<string, mixed> $superAttributes
+     * @param array<string, mixed> $itemSuperAttributes
+     */
+    protected function isVariantReachableFromItem(array $superAttributes, array $itemSuperAttributes): bool
+    {
+        if (!$itemSuperAttributes) {
+            return true;
+        }
+
+        $itemSuperAttributesNotMatchingWithVariant = array_diff_assoc($itemSuperAttributes, $superAttributes);
+
+        return count($itemSuperAttributesNotMatchingWithVariant) <= 1;
     }
 
     /**
