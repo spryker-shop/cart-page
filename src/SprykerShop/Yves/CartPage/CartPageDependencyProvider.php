@@ -66,6 +66,11 @@ class CartPageDependencyProvider extends AbstractBundleDependencyProvider
     /**
      * @var string
      */
+    public const PLUGINS_REPLACEMENT_CART_ITEM_EXPANDER = 'PLUGINS_REPLACEMENT_CART_ITEM_EXPANDER';
+
+    /**
+     * @var string
+     */
     public const PLUGINS_MINI_CART_VIEW_EXPANDER = 'PLUGINS_MINI_CART_VIEW_EXPANDER';
 
     /**
@@ -146,6 +151,7 @@ class CartPageDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addCartPageWidgetPlugins($container);
         $container = $this->addCartItemTransformerPlugins($container);
         $container = $this->addPreAddToCartPlugins($container);
+        $container = $this->addReplacementCartItemExpanderPlugins($container);
         $container = $this->addMiniCartViewExpanderPlugins($container);
         $container = $this->addZedRequestClient($container);
         $container = $this->addCsrfProviderService($container);
@@ -344,6 +350,23 @@ class CartPageDependencyProvider extends AbstractBundleDependencyProvider
      * @return array<\SprykerShop\Yves\CartPageExtension\Dependency\Plugin\PreAddToCartPluginInterface>
      */
     protected function getPreAddToCartPlugins(): array
+    {
+        return [];
+    }
+
+    protected function addReplacementCartItemExpanderPlugins(Container $container): Container
+    {
+        $container->set(static::PLUGINS_REPLACEMENT_CART_ITEM_EXPANDER, function () {
+            return $this->getReplacementCartItemExpanderPlugins();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return array<\SprykerShop\Yves\CartPageExtension\Dependency\Plugin\ReplacementCartItemExpanderPluginInterface>
+     */
+    protected function getReplacementCartItemExpanderPlugins(): array
     {
         return [];
     }

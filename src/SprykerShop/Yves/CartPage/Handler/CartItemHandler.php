@@ -33,14 +33,27 @@ class CartItemHandler implements CartItemHandlerInterface
      */
     protected $zedRequestClient;
 
+    /**
+     * @var array<\SprykerShop\Yves\CartPageExtension\Dependency\Plugin\ReplacementCartItemExpanderPluginInterface>
+     */
+    protected array $replacementCartItemExpanderPlugins;
+
+    /**
+     * @param \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToCartClientInterface $cartClient
+     * @param \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToProductStorageClientInterface $productClient
+     * @param \SprykerShop\Yves\CartPage\Dependency\Client\CartPageToZedRequestClientInterface $zedRequestClient
+     * @param array<\SprykerShop\Yves\CartPageExtension\Dependency\Plugin\ReplacementCartItemExpanderPluginInterface> $replacementCartItemExpanderPlugins
+     */
     public function __construct(
         CartPageToCartClientInterface $cartClient,
         CartPageToProductStorageClientInterface $productClient,
-        CartPageToZedRequestClientInterface $zedRequestClient
+        CartPageToZedRequestClientInterface $zedRequestClient,
+        array $replacementCartItemExpanderPlugins = []
     ) {
         $this->cartClient = $cartClient;
         $this->productClient = $productClient;
         $this->zedRequestClient = $zedRequestClient;
+        $this->replacementCartItemExpanderPlugins = $replacementCartItemExpanderPlugins;
     }
 
     /**
@@ -77,6 +90,7 @@ class CartItemHandler implements CartItemHandlerInterface
         $itemTransfer->setSku($newItemSku);
         $itemTransfer->setQuantity($quantity);
         $this->addProductOptions($optionValueIds, $itemTransfer);
+        $itemTransfer = $this->executeReplacementCartItemExpanderPlugins($itemTransfer, $currentItemSku, $groupKey);
 
         $this->cartClient->addItem($itemTransfer);
         $this->zedRequestClient->addResponseMessagesToMessenger();
@@ -84,6 +98,45 @@ class CartItemHandler implements CartItemHandlerInterface
         if (count($this->zedRequestClient->getResponsesErrorMessages()) === 0) {
             $this->cartClient->removeItem($currentItemSku, $groupKey);
         }
+    }
+
+    protected function executeReplacementCartItemExpanderPlugins(
+        ItemTransfer $itemTransfer,
+        string $replacedItemSku,
+        ?string $replacedItemGroupKey
+    ): ItemTransfer {
+        if (!$this->replacementCartItemExpanderPlugins) {
+            return $itemTransfer;
+        }
+
+        $replacedItemTransfer = $this->findQuoteItem($replacedItemSku, $replacedItemGroupKey);
+
+        if (!$replacedItemTransfer) {
+            return $itemTransfer;
+        }
+
+        foreach ($this->replacementCartItemExpanderPlugins as $replacementCartItemExpanderPlugin) {
+            $itemTransfer = $replacementCartItemExpanderPlugin->expandReplacementCartItem($itemTransfer, $replacedItemTransfer);
+        }
+
+        return $itemTransfer;
+    }
+
+    protected function findQuoteItem(string $sku, ?string $groupKey): ?ItemTransfer
+    {
+        foreach ($this->cartClient->getQuote()->getItems() as $itemTransfer) {
+            if ($itemTransfer->getSku() !== $sku) {
+                continue;
+            }
+
+            if ($groupKey !== null && $itemTransfer->getGroupKey() !== $groupKey) {
+                continue;
+            }
+
+            return $itemTransfer;
+        }
+
+        return null;
     }
 
     /**

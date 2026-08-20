@@ -69,6 +69,7 @@ class CartPageFactory extends AbstractFactory
             $this->getCartClient(),
             $this->getProductStorageClient(),
             $this->getZedRequestClient(),
+            $this->getReplacementCartItemExpanderPlugins(),
         );
     }
 
@@ -177,6 +178,14 @@ class CartPageFactory extends AbstractFactory
     public function getPreAddToCartPlugins(): array
     {
         return $this->getProvidedDependency(CartPageDependencyProvider::PLUGIN_PRE_ADD_TO_CART);
+    }
+
+    /**
+     * @return array<\SprykerShop\Yves\CartPageExtension\Dependency\Plugin\ReplacementCartItemExpanderPluginInterface>
+     */
+    public function getReplacementCartItemExpanderPlugins(): array
+    {
+        return $this->getProvidedDependency(CartPageDependencyProvider::PLUGINS_REPLACEMENT_CART_ITEM_EXPANDER);
     }
 
     /**
