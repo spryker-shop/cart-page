@@ -13,7 +13,7 @@ export default class CartItemsList extends Component {
 
     protected mapEvents(): void {
         this.providers.forEach((provider: AjaxProvider) => {
-            provider.addEventListener('fetched', (event: Event) => this.onFetched(event));
+            provider.addEventListener('fetched', () => this.onFetched());
         });
     }
 
