@@ -1,0 +1,1 @@
+Reports what an async cart action changed in the cart. When the cart action starts, it reads the rendered cart lines; once the re-rendered cart is in the page it compares the lines by group key and dispatches the `event-name` event with the increased and decreased lines in `detail`, each with its tracking details and the changed quantity.

@@ -6,10 +6,18 @@
 } %}
 
 {% define data = {
+    isTracked: false,
     cart: {},
     isQuoteEditable: false,
     attributes: [],
     ajaxTriggerAttribute: null,
+} %}
+
+{# The cart line as tracked by the traceable events, in the same shape as a cart change reports it. Captured, so the attribute holds the escaped JSON once. #}
+{% set cartItemTrackingDetails %}{% include view('cart-item-tracking-details', 'CartPage') with { item: data.product } only %}{% endset %}
+
+{% define attributes = {
+    'tracking-details': cartItemTrackingDetails ? cartItemTrackingDetails : false,
 } %}
 
 {% set canEditCart = not is_granted('ROLE_USER') or data.isQuoteEditable %}

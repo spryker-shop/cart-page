@@ -42,6 +42,7 @@
         "spryker/testify": "*"
     },
     "suggest": {
+        "spryker-feature/product-experience-management": "If you want to use ProductAttributeVisibilityCartWidget.",
         "spryker-shop/asset-widget": "If you want to use components from module AssetWidget",
         "spryker-shop/availability-widget": "If you want to use components from module AvailabilityWidget",
         "spryker-shop/configurable-bundle-widget": "Add the module if you want to use QuoteConfiguredBundleWidget.",
@@ -55,12 +56,12 @@
         "spryker-shop/product-option-widget": "If you want to use components from module ProductOptionWidget or CartItemProductOptionWidgetPlugin",
         "spryker-shop/product-packaging-unit-widget": "If you want to use components from module ProductPackagingUnitWidget or CartProductPackagingUnitWidgetPlugin",
         "spryker-shop/sales-order-amendment-widget": "If you want to use CancelOrderAmendmentWidget or OrderAmendmentItemLinkWidget.",
+        "spryker-shop/traceable-event-widget": "^1.5.0: If you want cart changes reported to the traceable events, e.g. as CART_ITEMS_CHANGE.",
         "spryker/container": "If you want to use the CartTwigPlugin",
         "spryker/permission": "If you want to use permissions plugins",
         "spryker/router": "Use this module when using plugins that adds routes to the Route Module.",
         "spryker/shipment": "If you want to use the shipment total price, min version 8.4.0",
-        "spryker/silex": "Use this module when using plugins that need Silex dependencies.",
-        "spryker-feature/product-experience-management": "If you want to use ProductAttributeVisibilityCartWidget."
+        "spryker/silex": "Use this module when using plugins that need Silex dependencies."
     },
     "autoload": {
         "psr-4": {

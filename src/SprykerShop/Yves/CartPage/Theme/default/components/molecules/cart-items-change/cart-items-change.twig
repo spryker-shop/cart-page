@@ -1,0 +1,22 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'cart-items-change',
+    tag: 'cart-items-change',
+} %}
+
+{#
+    event-name - event the component dispatches after an async cart action changed the cart lines, bubbling to the document; register it in the `events` config.
+    provider-class-name - class of the ajax provider of the async cart actions.
+    target-class-name - class of the element the async cart renders the cart into.
+    cart-line-selector - cart lines within the target, each with the `tracking-details` JSON of the line, including its `groupKey` and `quantity`.
+#}
+{% define attributes = {
+    'event-name': required,
+    'provider-class-name': required,
+    'target-class-name': required,
+    'cart-line-selector': '.js-product-cart-item[tracking-details], .js-configured-bundle [tracking-details]',
+    hidden: true,
+} %}
+
+{% block body %}{% endblock %}

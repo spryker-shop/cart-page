@@ -47,6 +47,7 @@
 {% set ajaxContentClass = 'js-page-layout-cart__content' %}
 {% set ajaxProviderClass = data.isCartActionsAsyncModeEnabled ? 'js-page-layout-cart__provider' : null %}
 {% set ajaxTriggerAttribute = data.isCartActionsAsyncModeEnabled ? 'data-cart-ajax-form-submitter' : null %}
+{% set cartItemsChangeEventName = 'cart-items-change' %}
 
 {% block content %}
     {% block contentOuter %}
@@ -374,11 +375,203 @@
                     event: 'click:change',
                 },
             } only %}
+
+            {% block cartItemsChange %}
+                {# Outside the re-rendered cart, so it keeps the cart lines from before a cart action until the re-rendered cart shows the lines after it. #}
+                {% if findWidget('TraceableEventWidget').parameters.isUserActionTrackingEnabled ?? false %}
+                    {% include molecule('cart-items-change', 'CartPage') with {
+                        attributes: {
+                            'event-name': cartItemsChangeEventName,
+                            'provider-class-name': ajaxProviderClass,
+                            'target-class-name': ajaxContentClass,
+                        },
+                    } only %}
+                {% endif %}
+            {% endblock %}
         {% endblock %}
     {% endif %}
 {% endblock %}
 
 {% block eventTracker %}
+    {# A project replaces a list by setting it before {{ parent() }} in its own eventTracker block. #}
+    {% set syncCartChangeEvents = syncCartChangeEvents ?? [
+        {
+            event: 'ADD_TO_CART',
+            name: 'submit',
+            triggers: [
+                {
+                    selector: 'form[name^="addToCartForm_"]',
+                    groupAs: {
+                        key: 'products',
+                        toArray: true,
+                    },
+                    data: {
+                        details: {
+                            selector: '[details]',
+                            closest: true,
+                            attribute: 'details',
+                            flatten: true,
+                        },
+                        quantity: {
+                            value: 1,
+                        },
+                    },
+                },
+            ],
+        },
+        {
+            event: 'REMOVE_FROM_CART',
+            name: 'submit',
+            triggers: [
+                {
+                    selector: 'form[name^="removeFromCartForm_"]',
+                    groupAs: {
+                        key: 'products',
+                        toArray: true,
+                    },
+                    data: {
+                        details: {
+                            selector: '.js-product-cart-item[tracking-details]',
+                            closest: true,
+                            attribute: 'tracking-details',
+                            flatten: true,
+                        },
+                    },
+                },
+                {
+                    selector: 'form[action*="/cart/configured-bundle/remove/"]',
+                    data: {
+                        configuredBundle: {
+                            selector: '.js-configured-bundle',
+                            closest: true,
+                            flatten: true,
+                            composed: {
+                                products: {
+                                    multi: true,
+                                    selector: '[tracking-details]',
+                                    attribute: 'tracking-details',
+                                },
+                            },
+                        },
+                    },
+                },
+                {
+                    selector: 'form[data-qa="multi-cart-clear-form"]',
+                    data: {
+                        cartPage: {
+                            selector: 'body',
+                            closest: true,
+                            flatten: true,
+                            composed: {
+                                products: {
+                                    multi: true,
+                                    selector: '.js-product-cart-item[tracking-details], .js-configured-bundle [tracking-details]',
+                                    attribute: 'tracking-details',
+                                },
+                            },
+                        },
+                    },
+                },
+            ],
+        },
+        {
+            event: 'CHANGE_CART_QUANTITY',
+            name: 'submit',
+            triggers: [
+                {
+                    selector: 'form[name^="cartChangeQuantityForm_"]',
+                    groupAs: {
+                        key: 'products',
+                        toArray: true,
+                    },
+                    data: {
+                        details: {
+                            selector: '.js-product-cart-item[tracking-details]',
+                            closest: true,
+                            attribute: 'tracking-details',
+                            flatten: true,
+                        },
+                        newQuantity: [
+                            {
+                                selector: '.js-formatted-number-input__hidden-input',
+                                attribute: 'value',
+                            },
+                            {
+                                selector: 'input[name="quantity"]',
+                                attribute: 'value',
+                            },
+                            {
+                                value: null,
+                            },
+                        ],
+                    },
+                },
+            ],
+        },
+        {
+            event: 'ADD_TO_CART',
+            name: 'submit',
+            triggers: [
+                {
+                    selector: '.js-product-quick-add-form__form',
+                    groupAs: {
+                        key: 'products',
+                        toArray: true,
+                    },
+                    data: {
+                        quantity: {
+                            selector: '.js-formatted-number-input__hidden-input',
+                            attribute: 'value',
+                        },
+                        sku: {
+                            selector: 'input[data-name="value"]',
+                            attribute: 'value',
+                        },
+                    },
+                },
+            ],
+        },
+    ] %}
+
+    {# The cart-items-change component announces each change of a cart action once, with the changed lines in the event detail. Not debounced: every announcement carries its own change, so none may be dropped. #}
+    {% set asyncCartChangeEvents = asyncCartChangeEvents ?? [
+        {
+            event: 'CART_ITEMS_CHANGE',
+            name: cartItemsChangeEventName,
+            debounce: false,
+            triggers: [
+                {
+                    selector: 'cart-items-change',
+                },
+            ],
+        },
+    ] %}
+
+    {% set cartChangeEvents = data.isCartActionsAsyncModeEnabled ? asyncCartChangeEvents : syncCartChangeEvents %}
+
+    {# The products of the cart shown, as the traceable events report a cart view, e.g. GA4 view_cart: a product bundle counts as one product,
+       so the products inside it are left out; the price in cents, per unit after discounts and as the shopper sees it, with tax in gross mode
+       (the order confirmation reports it without tax, as tax is sent on its own there). Built only while the storefront tracks user actions. #}
+    {% set cartProducts = [] %}
+    {% if findWidget('TraceableEventWidget').parameters.isUserActionTrackingEnabled ?? false %}
+        {% set canSeePrices = can('SeePricePermissionPlugin') %}
+        {% set viewedCartItems = data.cart.items | default([]) | filter(item => item.relatedBundleItemIdentifier is empty) | merge(data.cart.bundleItems | default([])) %}
+        {% for item in viewedCartItems %}
+            {% set cartProducts = cartProducts | merge([{
+                sku: item.sku,
+                abstractSku: item.abstractSku | default(null),
+                name: item.name,
+                abstractName: item.abstractName | default(null),
+                brand: item.brand | default(null),
+                variant: item.selectedVariantAttributes | default([]) | reduce((values, value) => values | merge([value]), []),
+                categories: item.categoryPath | default([]) | map(categoryName => { name: categoryName }),
+                price: canSeePrices ? item.unitPriceToPayAggregation : null,
+                quantity: item.quantity,
+            }]) %}
+        {% endfor %}
+    {% endif %}
+
+    {# The shopping list trigger is the clicked button itself, not a focused one: Safari and Firefox on macOS do not focus a button on click. #}
     {% set events = {
         list: events.list | merge([
             {
@@ -386,44 +579,29 @@
                 name: 'click',
                 triggers: [
                     {
-                        selector: 'body:has([data-create-shopping-list-from-cart-submitter]:focus)',
+                        selector: '[data-create-shopping-list-from-cart-submitter]',
                         data: {
-                            products: {
-                                multi: true,
-                                selector: '.js-product-cart-item',
-                                attribute: 'details',
+                            cartPage: {
+                                selector: 'body',
+                                closest: true,
+                                flatten: true,
+                                composed: {
+                                    products: {
+                                        multi: true,
+                                        selector: '.js-product-cart-item',
+                                        attribute: 'tracking-details',
+                                    },
+                                },
                             },
                         },
                     },
                 ],
             },
-            {
-                event: 'ADD_TO_CART',
-                name: 'click',
-                triggers: [
-                    {
-                        selector: '.product-quick-add-form:has(.js-product-quick-add-form__submit-button:focus)',
-                        groupAs: {
-                            key: 'products',
-                            toArray: true,
-                        },
-                        data: {
-                            quantity: {
-                                selector: '.js-formatted-number-input__hidden-input',
-                                attribute: 'value',
-                            },
-                            sku: {
-                                selector: 'input[data-name="value"]',
-                                attribute: 'value',
-                            },
-                        },
-                    },
-                ],
-            }
-        ]),
+        ] | merge(cartChangeEvents)),
 
         data: events.data | merge({
             page: 'CART',
+            cartProducts: cartProducts,
         }),
     } %}
 

@@ -1,0 +1,16 @@
+{#- A cart line as the traceable events report it: the quantity of the line, or of its change, and the unit price in cents. Empty while the storefront does not track user actions. The cart stores the selected attributes and the category path of an item. -#}
+{%- set isUserActionTrackingEnabled = findWidget('TraceableEventWidget').parameters.isUserActionTrackingEnabled ?? false -%}
+{%- if isUserActionTrackingEnabled -%}
+{%- include model('tracking-details') ignore missing with { product: {
+    sku: item.sku,
+    abstractSku: item.abstractSku | default(null),
+    groupKey: item.groupKey,
+    name: item.name,
+    abstractName: item.abstractName | default(null),
+    brand: item.brand | default(null),
+    variant: item.selectedVariantAttributes | default([]) | reduce((values, value) => values | merge([value]), []),
+    categories: item.categoryPath | default([]) | map(categoryName => { name: categoryName }),
+    price: item.unitPrice,
+    quantity: item.quantity,
+} } only -%}
+{%- endif -%}
